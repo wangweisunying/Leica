@@ -27,12 +27,12 @@ import panel.FoodSen96;
  */
 public class ReadtoDB {
     public static void main(String args[]) throws IOException, SQLException{
-        String pillarId = "FOOG80120010000167";
+        String pillarId = "FS8480010010000011";
         String path = "C:\\Users\\Wei Wang\\Desktop\\new food sensitivity\\output\\";
         
         
-        FoodSen96.insertDB(pillarId , path + pillarId + ".xlsx");
-//        FoodSen84.insertDB(pillarId , path + pillarId + ".xlsx");
+//        FoodSen96.insertDB(pillarId , path + pillarId + ".xlsx");
+        FoodSen84.insertDB(pillarId , path + pillarId + ".xlsx");
 //        ALPS.insertDB(pillarId , path + pillarId + ".xlsx");
     }
     

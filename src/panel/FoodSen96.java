@@ -316,7 +316,7 @@ public class FoodSen96 extends LeicaPanel {
                 
                 String location = locationRow.getCell(curColCt).getStringCellValue();
                 
-                if ( julienRow.getCell(curColCt) == null || !Character.isDigit(julienRow.getCell(curColCt).getStringCellValue().charAt(0))||location.startsWith("Dup")) {
+                if ( julienRow.getCell(curColCt) == null  ||  julienRow.getCell(curColCt).getStringCellValue().equals("") ||  !Character.isDigit(julienRow.getCell(curColCt).getStringCellValue().charAt(0))||location.startsWith("Dup")) {
                     ++curColCt;
                     continue;
                 }

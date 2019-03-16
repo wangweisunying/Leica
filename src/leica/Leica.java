@@ -33,14 +33,14 @@ public class Leica {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-       String pillarId = "FS8480010010000011";
+       String pillarId = "FOOA80120010000151";
        String path = "C:\\Users\\Wei Wang\\Desktop\\new food sensitivity\\output\\";
 
 
 
 //       LeicaPanel test = new ALPS(pillarId);
-//       LeicaPanel test = new FoodSen96(pillarId);
-       LeicaPanel test = new FoodSen84(pillarId); 
+       LeicaPanel test = new FoodSen96(pillarId);
+//       LeicaPanel test = new FoodSen84(pillarId); 
 
 
 

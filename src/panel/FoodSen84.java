@@ -170,7 +170,7 @@ public class FoodSen84 extends LeicaPanel {
         DataBaseCon db = new V7DataBaseCon();
 
         String surfix = chanel.toUpperCase().equals("GREEN") ? "_IGG_FS" : "_IGA_FS";
-        String sql = "SELECT concat(row ,col) , `index` , `signal` FROM `vibrant_test_raw_data`.`food_test_84` where  pillar_plate_id = '" + pillarId + "' and  channel = '" + chanel + "'  order by col , `row` , `index`;";
+        String sql = "SELECT concat(row ,col) , `index` , `signal` FROM `vibrant_test_raw_data`.`test_raw_data` where  pillar_plate_id = '" + pillarId + "' and  channel = '" + chanel + "'  order by col , `row` , `index`;";
         ResultSet rs = db.read(sql);
         while (rs.next()) {
             map.computeIfAbsent(rs.getString(1), x -> new LinkedHashMap()).put(index2TestCodeMap.get(rs.getInt(2)) + surfix, rs.getInt(3));
@@ -290,7 +290,7 @@ public class FoodSen84 extends LeicaPanel {
                 
                 String location = locationRow.getCell(curColCt).getStringCellValue();
                 
-                if ( julienRow.getCell(curColCt) == null || !Character.isDigit(julienRow.getCell(curColCt).getStringCellValue().charAt(0))||location.startsWith("Dup")) {
+                if ( julienRow.getCell(curColCt) == null ||  julienRow.getCell(curColCt).getStringCellValue().equals("") || !Character.isDigit(julienRow.getCell(curColCt).getStringCellValue().charAt(0))||location.startsWith("Dup")) {
                     ++curColCt;
                     continue;
                 }

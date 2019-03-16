@@ -87,7 +87,7 @@ public class ALPS extends LeicaPanel {
         DataBaseCon db = new V7DataBaseCon();
 
         String surfix = chanel.toUpperCase().equals("GREEN") ? "IGG_IGM_unit" : "IGA_unit";
-        String sql = "SELECT concat(row ,col) , `index` , `signal` FROM `vibrant_test_raw_data`.`alps` where  pillar_plate_id = '" + pillarId + "' and  channel = '" + chanel + "' and `index` not in (0 , 9 , 90 , 99)  order by  col , `row` , `index`;";
+        String sql = "SELECT concat(row ,col) , `index` , `signal` FROM `vibrant_test_raw_data`.`test_raw_data` where  pillar_plate_id = '" + pillarId + "' and  channel = '" + chanel + "'  order by  col , `row` , `index`;";
         System.out.println(sql);
         ResultSet rs = db.read(sql);
         while (rs.next()) {
@@ -215,7 +215,7 @@ public class ALPS extends LeicaPanel {
                 
                 String location = locationRow.getCell(curColCt).getStringCellValue();
                 
-                if ( julienRow.getCell(curColCt) == null || !Character.isDigit(julienRow.getCell(curColCt).getStringCellValue().charAt(0))||location.startsWith("Dup")) {
+                if ( julienRow.getCell(curColCt) == null ||  julienRow.getCell(curColCt).getStringCellValue().equals("") ||  !Character.isDigit(julienRow.getCell(curColCt).getStringCellValue().charAt(0))||location.startsWith("Dup")) {
                     ++curColCt;
                     continue;
                 }
