@@ -27,7 +27,7 @@ import panel.FoodSen96;
  */
 public class ReadtoDB {
     public static void main(String args[]) throws IOException, SQLException{
-        String pillarId = "FS8480010010000011";
+        String pillarId = "FS8480010010000012";
         String path = "C:\\Users\\Wei Wang\\Desktop\\new food sensitivity\\output\\";
         
         

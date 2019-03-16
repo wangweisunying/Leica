@@ -278,6 +278,7 @@ public class FoodSen84 extends LeicaPanel {
         DataBaseCon db = new V7DataBaseCon();
 
         Random rand = new Random();
+        db.write("delete from `tsp_test_qc_data`.`test_qc_data` where pillar_plate_id = '"+ pillarId +"';");
         for (int i = 0; i < list.size(); i++) {
             Sheet sheet = list.get(i);
             String type = i == 0 ? "g" : "a";
@@ -304,7 +305,9 @@ public class FoodSen84 extends LeicaPanel {
                 }
                 ++curColCt;
             }
-
+            
+            
+            
             db.write("insert into `tsp_test_qc_data`.`test_qc_data`(test_name,pillar_plate_id,cal_1,pos_ctrl_1,time) values ('FOO" + type.toUpperCase() + "','" + pillarId
                     + "','" + (rand.nextInt(11) + 5) + "','" + (rand.nextInt(11) + 25) + "',now());");
         }

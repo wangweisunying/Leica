@@ -304,6 +304,9 @@ public class FoodSen96 extends LeicaPanel {
         DataBaseCon db = new V7DataBaseCon();
 
         Random rand = new Random();
+        
+        db.write("delete from `tsp_test_qc_data`.`test_qc_data` where pillar_plate_id = '"+ pillarId +"';");
+        
         for (int i = 0; i < list.size(); i++) {
             Sheet sheet = list.get(i);
             String type = i == 0 ? "g" : "a";

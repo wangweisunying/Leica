@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import model.ExcelOperation;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.ComparisonOperator;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
@@ -33,13 +34,13 @@ public class Leica {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-       String pillarId = "FOOA80120010000151";
+       String pillarId = "ALPG80010290000152";
        String path = "C:\\Users\\Wei Wang\\Desktop\\new food sensitivity\\output\\";
 
 
 
-//       LeicaPanel test = new ALPS(pillarId);
-       LeicaPanel test = new FoodSen96(pillarId);
+       LeicaPanel test = new ALPS(pillarId);
+//       LeicaPanel test = new FoodSen96(pillarId);
 //       LeicaPanel test = new FoodSen84(pillarId); 
 
 
@@ -146,6 +147,9 @@ public class Leica {
             }
             ++curColCt;
             
+            
+            Row posCtRow = sheetUnit.createRow(++curRowCt);
+            
             //init row cf
             curRowCt = 2;
             while(sheetUnit.getRow(curRowCt)!= null) sheetUnit.getRow(curRowCt++).createCell(1).setCellValue(1);
@@ -162,6 +166,15 @@ public class Leica {
                     String cellLoc = ExcelOperation.transferIntgerToString(curColCt + 1);
                     sheetUnit.getRow(curRowCt++).createCell(curColCt).setCellFormula(  cellLoc + 1 + "*" + unit + "*B" +  + curRowCt );
                 }
+                
+                
+                String range = ExcelOperation.transferIntgerToString(curColCt + 1);
+                Cell ctCell = posCtRow.createCell(curColCt);
+                ctCell.setCellFormula("COUNTIF("+ range +"4:"+ range + curRowCt +", \">10\")");
+                
+                
+                ExcelOperation.setConditionalFormatting(sheetUnit, IndexedColors.LIGHT_ORANGE, ComparisonOperator.GT, new String[]{"30"},range + (curRowCt + 2) + ":" + range + (curRowCt + 2) );
+                
                 ++curColCt;
                 
                 //insert dup data
@@ -183,7 +196,7 @@ public class Leica {
                 }
                 
             }
-            
+                      
             //color the range
             String range = "C4:" + ExcelOperation.transferIntgerToString(curColCt) + curRowCt;
             
@@ -191,6 +204,20 @@ public class Leica {
             ExcelOperation.setConditionalFormatting(sheetUnit, IndexedColors.YELLOW, ComparisonOperator.BETWEEN, new String[]{"10" , "20"}, range);
             ExcelOperation.setConditionalFormatting(sheetUnit, IndexedColors.RED, ComparisonOperator.GT, new String[]{"20"}, range);
             
+            
+            ++curColCt;
+            String colString = ExcelOperation.transferIntgerToString(curColCt + 1); 
+            curRowCt = 3;
+            
+            while(sheetUnit.getRow(curRowCt) != null){
+                String rangeCt =  colString + (curRowCt + 1); 
+                Cell cell = sheetUnit.getRow(curRowCt).createCell(curColCt);
+                String thisRange = "C" + (curRowCt + 1) + ":" + ExcelOperation.transferIntgerToString(curColCt - 1) + (curRowCt + 1);
+                
+                cell.setCellFormula("COUNTIF(" + thisRange + ",\">10\")");
+                ExcelOperation.setConditionalFormatting(sheetUnit, IndexedColors.ORANGE, ComparisonOperator.GT, new String[]{"15"}, rangeCt + ":" + rangeCt);
+                curRowCt++;
+            }
             
         }
         
